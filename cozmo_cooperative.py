@@ -2,15 +2,12 @@ import cozmo
 import random
 import time
 
-# In this code, the traverse_maze function implements an algorithm for the robot to traverse a maze. 
-# You would need to define this algorithm based on the specific maze that the robot will encounter.
+# In this code, the traverse_maze function lets a user to control Cozmo to traverse a maze. 
 
-# The prisoners_dilemma function prompts the human to decide whether they want to cooperate or betray. 
-# The robot randomly decides whether it wants to cooperate or betray. 
-# Depending on the choices made by the human and the robot, 
-# the function prints a message and gives rewards or punishments to both the human and the robot.
+# The prisoners_dilemma function prompts the human to decide whether they want to cooperate or betray (use explosives or not). 
+# Cozmo always cooperates.
 
-# The main function calls traverse_maze and play_prisoners_dilemma in sequence. 
+# The main function calls traverse_maze and prisoners_dilemma in sequence. 
 # Finally, the cozmo.run_program function is used to start the program and connect to the robot.
 
 
