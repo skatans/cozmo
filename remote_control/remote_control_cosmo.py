@@ -122,24 +122,52 @@ def handle_keyup():
 def handle_updateCozmo():
     return cozmo_helper.updateCozmo()
 
-@flask_app.route('/button1', methods=['POST'])
+@flask_app.route('/user_cooperates', methods=['POST'])
 def handle_button1():
-    remote_control_cozmo.say_text("hello")
+    # user cooperated
+    remote_control_cozmo.say_text("you cooperate")
+    if remote_control_cozmo.cooperate:
+        remote_control_cozmo.say_text("i cooperate")
+        # play successful response
+    else:
+        remote_control_cozmo.say_text("i mirror")
+        # check what the user did the last time
+        if remote_control_cozmo.user_cooperated_last_time:
+            remote_control_cozmo.say_text("i cooperate")
+        else:
+            remote_control_cozmo.say_text("i betray")
+        # if cozmo betrayed user, play appropriate animation
+    # log cooperation
+    remote_control_cozmo.user_cooperated_last_time = True
     return ""
 
-@flask_app.route('/button2', methods=['POST'])
+@flask_app.route('/user_betrays', methods=['POST'])
 def handle_button2():
-    remote_control_cozmo.say_text("hello")
+    # user betrayed cozmo, log betrayal
+    remote_control_cozmo.say_text("you betray")
+    if remote_control_cozmo.cooperate:
+        remote_control_cozmo.say_text("i cooperate")
+        # play betrayed response
+    else:
+        remote_control_cozmo.say_text("i mirror")
+        # check what the user did the last time
+        if remote_control_cozmo.user_cooperated_last_time:
+            remote_control_cozmo.say_text("i cooperate")
+        else:
+            remote_control_cozmo.say_text("i betray")
+        # if cozmo betrayed user, play appropriate animation
+    # log cooperation
+    remote_control_cozmo.user_cooperated_last_time = False
     return ""
 
-@flask_app.route('/button3', methods=['POST'])
+@flask_app.route('/talk', methods=['POST'])
 def handle_button3():
-    remote_control_cozmo.play_animation("anim_upgrade_reaction_lift_01")
+    remote_control_cozmo.say_text("What do you want to do?")
     return ""
 
-@flask_app.route('/button4', methods=['POST'])
+@flask_app.route('/change_cooperation_setting', methods=['POST'])
 def handle_button4():
-    remote_control_cozmo.say_text("hello")
+    remote_control_cozmo.toggle_cooperation()
     return ""
 
 
@@ -158,6 +186,7 @@ def run(sdk_conn):
     robot.camera.image_stream_enabled = True
 
     flask_helpers.run_flask(flask_app)
+
 
 if __name__ == '__main__':
     cozmo.setup_basic_logging()
