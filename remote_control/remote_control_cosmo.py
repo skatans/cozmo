@@ -122,6 +122,27 @@ def handle_keyup():
 def handle_updateCozmo():
     return cozmo_helper.updateCozmo()
 
+@flask_app.route('/button1', methods=['POST'])
+def handle_button1():
+    remote_control_cozmo.say_text("hello")
+    return ""
+
+@flask_app.route('/button2', methods=['POST'])
+def handle_button2():
+    remote_control_cozmo.say_text("hello")
+    return ""
+
+@flask_app.route('/button3', methods=['POST'])
+def handle_button3():
+    remote_control_cozmo.play_animation("anim_upgrade_reaction_lift_01")
+    return ""
+
+@flask_app.route('/button4', methods=['POST'])
+def handle_button4():
+    remote_control_cozmo.say_text("hello")
+    return ""
+
+
 
 def run(sdk_conn):
     robot = sdk_conn.wait_for_robot()

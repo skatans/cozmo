@@ -35,7 +35,10 @@ html = '''
                         <h3>Driving:</h3>
 
                         <b>W A S D</b> : Drive Forwards / Left / Back / Right<br><br>
-
+                        <button id="button1" onClick=button1Clicked(this) style="font-size: 14px">Button1</button>
+                        <button id="button2" onClick=button2Clicked(this) style="font-size: 14px">Button1</button>
+                        <button id="button3" onClick=button3Clicked(this) style="font-size: 14px">Button1</button>
+                        <button id="button4" onClick=button4Clicked(this) style="font-size: 14px">Button1</button>
                     </td>
                     <td width=30></td>
                     <td valign=top>
@@ -92,6 +95,26 @@ html = '''
                 function updateButtonEnabledText(button, isEnabled)
                 {
                     button.firstChild.data = isEnabled ? "Enabled" : "Disabled";
+                }
+
+                function button1Clicked(button)
+                {
+                    postHttpRequest("button1")
+                }
+
+                function button2Clicked(button)
+                {
+                    postHttpRequest("button2")
+                }
+
+                function button3Clicked(button)
+                {
+                    postHttpRequest("button3")
+                }
+
+                function button4Clicked(button)
+                {
+                    postHttpRequest("button4")
                 }
 
                 function handleDropDownSelect(selectObject)
