@@ -34,6 +34,10 @@ class RemoteControlCozmo:
     def __init__(self, coz):
         self.cozmo = coz
 
+        # stores which condition is used, cooperate/mirror
+        self.cooperate = True
+        self.user_cooperated_last_time = True
+
         self.drive_forwards = 0
         self.drive_back = 0
         self.turn_left = 0
@@ -112,6 +116,8 @@ class RemoteControlCozmo:
             head_vel = head_angle_delta * 0.03
             self.cozmo.move_head(head_vel)
 
+    def toggle_cooperation(self):
+        self.cooperate = not self.cooperate
 
     def set_mouse_look_enabled(self, is_mouse_look_enabled):
         was_mouse_look_enabled = self.is_mouse_look_enabled

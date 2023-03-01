@@ -35,10 +35,10 @@ html = '''
                         <h3>Driving:</h3>
 
                         <b>W A S D</b> : Drive Forwards / Left / Back / Right<br><br>
-                        <button id="button1" onClick=button1Clicked(this) style="font-size: 14px">Button1</button>
-                        <button id="button2" onClick=button2Clicked(this) style="font-size: 14px">Button1</button>
-                        <button id="button3" onClick=button3Clicked(this) style="font-size: 14px">Button1</button>
-                        <button id="button4" onClick=button4Clicked(this) style="font-size: 14px">Button1</button>
+                        <button id="button1" onClick=button1Clicked(this) style="font-size: 14px">User cooperated</button>
+                        <button id="button2" onClick=button2Clicked(this) style="font-size: 14px">User betrayed Cozmo</button>
+                        <button id="button3" onClick=button3Clicked(this) style="font-size: 14px">Talk</button>
+                        <button id="button4" onClick=button4Clicked(this) style="font-size: 14px">Mirror</button>
                     </td>
                     <td width=30></td>
                     <td valign=top>
@@ -47,6 +47,7 @@ html = '''
             </table>
 
             <script type="text/javascript">
+                var cozmoIsInCooperateMode = true
                 var gLastClientX = -1
                 var gLastClientY = -1
                 var gIsMouseLookEnabled = false
@@ -99,22 +100,23 @@ html = '''
 
                 function button1Clicked(button)
                 {
-                    postHttpRequest("button1")
+                    postHttpRequest("user_cooperates")
                 }
 
                 function button2Clicked(button)
                 {
-                    postHttpRequest("button2")
+                    postHttpRequest("user_betrays")
                 }
 
                 function button3Clicked(button)
                 {
-                    postHttpRequest("button3")
+                    postHttpRequest("talk")
                 }
 
                 function button4Clicked(button)
                 {
-                    postHttpRequest("button4")
+                    button.firstChild.data = button.firstChild.data == "Cooperate" ? "Mirror" : "Cooperate";
+                    postHttpRequest("change_cooperation_setting")
                 }
 
                 function handleDropDownSelect(selectObject)
