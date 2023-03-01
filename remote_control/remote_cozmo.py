@@ -172,6 +172,10 @@ class RemoteControlCozmo:
             if not speed_changed:
                 update_head = False
 
+        if key_code == ord('K'):
+            self.say_text("hello")
+            #self.play_animation("anim_upgrade_reaction_lift_01")
+
         # Update driving, head and lift as appropriate
         if update_driving:
             self.update_mouse_driving()
