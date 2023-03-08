@@ -13,16 +13,16 @@ Case where Cozmo initially cooperates, then mirrors the participant´s last acti
 #### Participant 1 (pilot-trials)
 
 ##### Trial 1 (cooperate):
-User betrayed, Cozmo cooperated
-User cooperated, Cozmo cooperated
-User betrayed, Cozmo cooperated
+User betrayed, Cozmo cooperated <br>
+User cooperated, Cozmo cooperated <br>
+User betrayed, Cozmo cooperated <br>
 
 time - 1:58
 
 ##### Trial 2 (mirror):
-User betrayed, Cozmo cooperated
-User cooperated, Cozmo betrayed
-User betrayed, Cozmo cooperated
+User betrayed, Cozmo cooperated <br>
+User cooperated, Cozmo betrayed <br>
+User betrayed, Cozmo cooperated <br>
 
 time - 1:42
 
