@@ -83,7 +83,7 @@ html = '''
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
-                            document.getElementById("DebugInfoId").innerHTML = xhr.responseText
+                            //document.getElementById("DebugInfoId").innerHTML = xhr.responseText
                         }
                     }
 
@@ -100,12 +100,32 @@ html = '''
 
                 function button1Clicked(button)
                 {
-                    postHttpRequest("user_cooperates")
+                    
+                    var xhr = new XMLHttpRequest();
+                    var oldtext = document.getElementById("DebugInfoId").innerHTML + "<br>"
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == XMLHttpRequest.DONE) {
+                            document.getElementById("DebugInfoId").innerHTML = oldtext + xhr.responseText
+                        }
+                    }
+
+                    xhr.open("POST", "user_cooperates");
+                    xhr.send( null );
                 }
 
                 function button2Clicked(button)
                 {
-                    postHttpRequest("user_betrays")
+                    
+                    var xhr = new XMLHttpRequest();
+                    var oldtext = document.getElementById("DebugInfoId").innerHTML + "<br>"
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == XMLHttpRequest.DONE) {
+                            document.getElementById("DebugInfoId").innerHTML = oldtext + xhr.responseText
+                        }
+                    }
+
+                    xhr.open("POST", "user_betrays");
+                    xhr.send( null );
                 }
 
                 function button3Clicked(button)

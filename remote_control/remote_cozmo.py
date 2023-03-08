@@ -211,6 +211,8 @@ class RemoteControlCozmo:
             return "say_text"
         elif func == self.try_play_anim:
             return "play_anim"
+        elif func == self.try_set_backpack_green:
+            return "set_backpack_green"
         else:
             return "UNKNOWN"
 
@@ -233,6 +235,23 @@ class RemoteControlCozmo:
         if len(self.action_queue) > 10:
             self.action_queue.pop(0)
         self.action_queue.append(new_action)
+
+    
+    
+    # TODO: not sure if this will work
+    def try_set_backpack_green(self):
+        try:
+            self.cozmo.set_all_backpack_lights(cozmo.lights.green_light)
+            return True
+        except cozmo.exceptions.RobotBusy:
+            return False
+
+    # TODO: not sure if this will work
+    def set_backpack_green(self):
+        self.queue_action((self.try_set_backpack_green))
+        self.update()
+
+
 
 
     def try_say_text(self, text_to_say):
