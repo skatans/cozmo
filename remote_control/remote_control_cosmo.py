@@ -147,7 +147,7 @@ def handle_button1():
             text = '''User cooperated, Cozmo cooperated '''
         else:
             # remote_control_cozmo.say_text("i betray")
-            remote_control_cozmo.say_text("no thanks, you can use your own explosives")
+            remote_control_cozmo.say_text("no thanks, use your own explosives and remove the obstacle yourself")
             text = '''User cooperated, Cozmo betrayed '''
         # if cozmo betrayed user, play appropriate animation
     # log cooperation
