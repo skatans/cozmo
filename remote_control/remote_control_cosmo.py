@@ -125,30 +125,22 @@ def handle_updateCozmo():
 @flask_app.route('/user_cooperates', methods=['POST'])
 def handle_button1():
     # user cooperated
-    # remote_control_cozmo.say_text("you cooperate")
     text = ""
     if remote_control_cozmo.cooperate:
-        # remote_control_cozmo.say_text("i cooperate")
+        text = "(Cozmo is cooperating) User cooperated"
         # play successful response
         # TODO for now:
         remote_control_cozmo.say_text("yay let's blow it up")
-        text = '''User cooperated, Cozmo cooperated '''
-        # remote_control_cozmo.set_backpack_green()
-        # set happy face
-        # remote_control_cozmo.play_anim_trigger(cozmo.anim.Triggers.CodeLabHappy, ignore_body_track=True).wait_for_completed() #happy face?
-        # remote_control_cozmo.time.sleep(2) 
-        # remote_control_cozmo.set_all_backpack_lights(cozmo.lights.off_light)
+        text = text + ''', Cozmo cooperated '''
     else:
-        # remote_control_cozmo.say_text("i mirror")
+        text = "(Cozmo is mirroring) User cooperated"
         # check what the user did the last time
         if remote_control_cozmo.user_cooperated_last_time:
-            # remote_control_cozmo.say_text("i cooperate")
             remote_control_cozmo.say_text("yay let's blow it up")
-            text = '''User cooperated, Cozmo cooperated '''
+            text = text + ''', Cozmo cooperated '''
         else:
-            # remote_control_cozmo.say_text("i betray")
-            remote_control_cozmo.say_text("no thanks, use your own explosives and remove the obstacle yourself")
-            text = '''User cooperated, Cozmo betrayed '''
+            remote_control_cozmo.say_text("I won't use mine! Use your own explosives and remove the obstacle yourself")
+            text =  text + ''', Cozmo betrayed '''
         # if cozmo betrayed user, play appropriate animation
     # log cooperation
     remote_control_cozmo.user_cooperated_last_time = True
@@ -162,19 +154,20 @@ def handle_button2():
     if remote_control_cozmo.cooperate:
         # remote_control_cozmo.say_text("i cooperate")
         # play betrayed response
-        remote_control_cozmo.say_text("oh no. I will use my explosives then")
-        text = '''User betrayed, Cozmo cooperated '''
+        remote_control_cozmo.say_text("oh no. I will use my own explosives then")
+        text = '''(Cozmo is cooperating) User betrayed, Cozmo cooperated '''
     else:
+        text = '''(Cozmo is mirroring)'''
         # remote_control_cozmo.say_text("i mirror")
         # check what the user did the last time
         if remote_control_cozmo.user_cooperated_last_time:
             # remote_control_cozmo.say_text("i cooperate")
-            remote_control_cozmo.say_text("oh no. I will use my explosives then")
-            text = '''User betrayed, Cozmo cooperated '''
+            remote_control_cozmo.say_text("oh no. I will use my own explosives then")
+            text = text + '''User betrayed, Cozmo cooperated '''
         else:
             # remote_control_cozmo.say_text("i betray")
             remote_control_cozmo.say_text("okey let's walk then")
-            text = '''User betrayed, Cozmo betrayed '''
+            text =  text + '''User betrayed, Cozmo betrayed '''
         # if cozmo betrayed user, play appropriate animation
     # log cooperation
     remote_control_cozmo.user_cooperated_last_time = False
