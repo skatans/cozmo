@@ -13,7 +13,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# Modifications by Tuisku Polvinen and Adam Bengtsson 2023
 
+'''The html and javascript for the web page for controlling cozmo'''
 html = '''
     <html>
         <head>
@@ -32,13 +35,18 @@ html = '''
                     <td valign=top>
                         <h2>Controls:</h2>
 
+                        <b>R F</b> : Move lift up/down<br><br>
+                        <b>T G</b> : Move head up/down<br>
+
                         <h3>Driving:</h3>
 
                         <b>W A S D</b> : Drive Forwards / Left / Back / Right<br><br>
-                        <button id="button1" onClick=button1Clicked(this) style="font-size: 14px">User cooperated</button>
-                        <button id="button2" onClick=button2Clicked(this) style="font-size: 14px">User betrayed Cozmo</button>
-                        <button id="button3" onClick=button3Clicked(this) style="font-size: 14px">Talk</button>
-                        <button id="button4" onClick=button4Clicked(this) style="font-size: 14px">Mirror</button>
+                        <b>Shift</b> : Drive faster<br><br>
+
+                        <button id="buttonUserCooperated" onClick=buttonUserCooperatedClicked(this) style="font-size: 14px">User cooperated</button>
+                        <button id="buttonUserBetrayed" onClick=buttonUserBetrayedClicked(this) style="font-size: 14px">User betrayed Cozmo</button>
+                        <button id="buttonTalk" onClick=buttonTalkClicked(this) style="font-size: 14px">Talk</button>
+                        <button id="buttonToggleMode" onClick=buttonToggleModeClicked(this) style="font-size: 14px">Cooperating, click to change to: Mirror</button>
                     </td>
                     <td width=30></td>
                     <td valign=top>
@@ -98,7 +106,7 @@ html = '''
                     button.firstChild.data = isEnabled ? "Enabled" : "Disabled";
                 }
 
-                function button1Clicked(button)
+                function buttonUserCooperatedClicked(button)
                 {
                     
                     var xhr = new XMLHttpRequest();
@@ -113,7 +121,7 @@ html = '''
                     xhr.send( null );
                 }
 
-                function button2Clicked(button)
+                function buttonUserBetrayedClicked(button)
                 {
                     
                     var xhr = new XMLHttpRequest();
@@ -128,15 +136,23 @@ html = '''
                     xhr.send( null );
                 }
 
-                function button3Clicked(button)
+                function buttonTalkClicked(button)
                 {
                     postHttpRequest("talk")
                 }
 
-                function button4Clicked(button)
+                function buttonToggleModeClicked(button)
                 {
-                    button.firstChild.data = button.firstChild.data == "Cooperate" ? "Mirror" : "Cooperate";
-                    postHttpRequest("change_cooperation_setting")
+                    var xhr = new XMLHttpRequest();
+                    var oldtext = document.getElementById("DebugInfoId").innerHTML + "<br>"
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == XMLHttpRequest.DONE) {
+                            document.getElementById("DebugInfoId").innerHTML = oldtext + xhr.responseText
+                        }
+                    }
+
+                    xhr.open("POST", "change_cooperation_setting");
+                    xhr.send( null );
                 }
 
                 function handleDropDownSelect(selectObject)

@@ -1,9 +1,9 @@
 # cozmo
 
-### cozmo_cooperative.py
+### cozmo_cooperative
 Case where Cozmo always cooperate (uses explosives?)
 
-### cozmo_sneaky.py
+### cozmo_sneaky
 Case where Cozmo initially cooperates, then mirrors the participant´s last action.
 
 
